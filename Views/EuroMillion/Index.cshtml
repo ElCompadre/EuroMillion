@@ -1,0 +1,43 @@
+﻿@model EuroMillion.Models.IndexModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h2>Numéros</h2>
+    <table class="table table-responsive">
+        <tr>
+            <th>Numéro</th>
+            <th>% de chance</th>
+            <th>Ecart de jours</th>
+        </tr>
+        @foreach (var numero in Model.Numeros)
+        {
+            <tr>
+                <th>@numero.Valeur</th>
+                <th>@numero.PourcentageChanceDeSortie %</th>
+                <th>@numero.EcartDateSortie</th>
+            </tr>
+        }
+    </table>
+
+    <h2>Etoiles</h2>
+    <table class="table table-responsive">
+        <tr>
+            <th>Etoile</th>
+            <th>% de chance</th>
+            <th>Ecart de jours</th>
+        </tr>
+        @foreach (var etoile in Model.Etoiles)
+        {
+            <tr>
+                <th>@etoile.Valeur</th>
+                <th>@etoile.PourcentageChanceDeSortie %</th>
+                <th>@etoile.EcartDateSortie</th>
+            </tr>
+        }
+    </table>
+</div>
+

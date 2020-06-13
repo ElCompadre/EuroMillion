@@ -1,0 +1,32 @@
+﻿@model IEnumerable<EuroMillion.Models.NumerosGagnant>
+
+@{
+    ViewBag.Title = "NumeroGagnant";
+}
+
+<h2>NumeroGagnant</h2>
+
+<div>
+    <h2>Numéros</h2>
+    <table class="table table-responsive">
+        <tr>
+            <th>Numéro</th>
+            <th>% de chance</th>
+            <th>Derniere sortie</th>
+            <th>Ecart de jours</th>
+            <th>Bonus/Malus</th>
+            <th>Etoile</th>
+        </tr>
+        @foreach (var numero in Model)
+        {
+            <tr>
+                <th>@numero.Valeur</th>
+                <th>@numero.PourcentageSortie %</th>
+                <th>@numero.DerniereSortie.Date.ToString("yy-MM-dd")</th>
+                <th>@numero.EcartJourSortie</th>
+                <th>@numero.BonusMalus</th>
+                <th>@numero.IsEtoile</th>
+            </tr>
+        }
+    </table>
+</div>

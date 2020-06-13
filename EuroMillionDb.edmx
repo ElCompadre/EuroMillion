@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EuroMillionModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DateSortie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateSortie" Type="datetime" Nullable="false" />
+          <Property Name="NumeroId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Numero">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Valeur" Type="int" />
+          <Property Name="IsEtoile" Type="bit" />
+          <Property Name="PourcentageChanceDeSortie" Type="float" />
+          <Property Name="EcartDateSortie" Type="float" />
+          <Property Name="NbrFoisSortie" Type="int" />
+          <Property Name="NbrDeSemaine" Type="int" />
+        </EntityType>
+        <Association Name="FK__DateSorti__Numer__5EBF139D">
+          <End Role="Numero" Type="Self.Numero" Multiplicity="1" />
+          <End Role="DateSortie" Type="Self.DateSortie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Numero">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DateSortie">
+              <PropertyRef Name="NumeroId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EuroMillionModelStoreContainer">
+          <EntitySet Name="DateSortie" EntityType="Self.DateSortie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Numero" EntityType="Self.Numero" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__DateSorti__Numer__5EBF139D" Association="Self.FK__DateSorti__Numer__5EBF139D">
+            <End Role="Numero" EntitySet="Numero" />
+            <End Role="DateSortie" EntitySet="DateSortie" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EuroMillionModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DateSortie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateSortie1" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NumeroId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Numero" Relationship="Self.FK__DateSorti__Numer__5EBF139D" FromRole="DateSortie" ToRole="Numero" />
+        </EntityType>
+        <EntityType Name="Numero">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Valeur" Type="Int32" />
+          <Property Name="IsEtoile" Type="Boolean" />
+          <Property Name="PourcentageChanceDeSortie" Type="Double" />
+          <Property Name="EcartDateSortie" Type="Double" />
+          <Property Name="NbrFoisSortie" Type="Int32" />
+          <Property Name="NbrDeSemaine" Type="Int32" />
+          <NavigationProperty Name="DateSortie" Relationship="Self.FK__DateSorti__Numer__5EBF139D" FromRole="Numero" ToRole="DateSortie" />
+        </EntityType>
+        <Association Name="FK__DateSorti__Numer__5EBF139D">
+          <End Role="Numero" Type="Self.Numero" Multiplicity="1" />
+          <End Role="DateSortie" Type="Self.DateSortie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Numero">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DateSortie">
+              <PropertyRef Name="NumeroId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EuroMillionEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DateSortie" EntityType="Self.DateSortie" />
+          <EntitySet Name="Numero" EntityType="Self.Numero" />
+          <AssociationSet Name="FK__DateSorti__Numer__5EBF139D" Association="Self.FK__DateSorti__Numer__5EBF139D">
+            <End Role="Numero" EntitySet="Numero" />
+            <End Role="DateSortie" EntitySet="DateSortie" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EuroMillionModelStoreContainer" CdmEntityContainer="EuroMillionEntities">
+          <EntitySetMapping Name="DateSortie">
+            <EntityTypeMapping TypeName="EuroMillionModel.DateSortie">
+              <MappingFragment StoreEntitySet="DateSortie">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DateSortie1" ColumnName="DateSortie" />
+                <ScalarProperty Name="NumeroId" ColumnName="NumeroId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Numero">
+            <EntityTypeMapping TypeName="EuroMillionModel.Numero">
+              <MappingFragment StoreEntitySet="Numero">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Valeur" ColumnName="Valeur" />
+                <ScalarProperty Name="IsEtoile" ColumnName="IsEtoile" />
+                <ScalarProperty Name="PourcentageChanceDeSortie" ColumnName="PourcentageChanceDeSortie" />
+                <ScalarProperty Name="EcartDateSortie" ColumnName="EcartDateSortie" />
+                <ScalarProperty Name="NbrFoisSortie" ColumnName="NbrFoisSortie" />
+                <ScalarProperty Name="NbrDeSemaine" ColumnName="NbrDeSemaine" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
